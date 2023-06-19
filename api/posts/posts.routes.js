@@ -16,7 +16,7 @@ router.param("postId", async (req, res, next, postId) => {
 
 router.get("/", postsGet);
 
-router.post("/", upload.single["image"], postsCreate);
+router.post("/", upload.single("image"), postsCreate);
 
 router.delete("/:postId", postsDelete);
 
