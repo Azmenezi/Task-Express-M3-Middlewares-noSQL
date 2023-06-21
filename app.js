@@ -13,13 +13,15 @@ const errorHandler = require("./middleware/errorHandler");
 connectDb();
 app.use(express.json());
 
+app.use("/media/", express.static(path.join(__dirname, "media")));
+app.use(cors());
+app.use(morgan("dev"));
+
 //routes
 app.use("/posts", postsRoutes);
 
 //middlewares
-app.use("/media/", express.static(path.join(__dirname, "media")));
-app.use(cors());
-app.use(morgan("dev"));
+
 app.use(pathNotFound);
 app.use(errorHandler);
 

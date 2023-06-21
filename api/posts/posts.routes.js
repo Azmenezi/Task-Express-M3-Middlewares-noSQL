@@ -11,7 +11,13 @@ const upload = require("../../middleware/uploader");
 
 router.param("postId", async (req, res, next, postId) => {
   try {
-  } catch (error) {}
+    const foundPost = await fetchMovie(postId);
+    if (!foundPost) return next({ status: 404, message: "Post not found" });
+    req.post = foundPost;
+    next();
+  } catch (error) {
+    return next(error);
+  }
 });
 
 router.get("/", postsGet);
